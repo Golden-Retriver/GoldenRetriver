@@ -1,0 +1,124 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "media"
+public_folder: "/media"
+
+local_backend: false
+
+collections:
+  - name: "site"
+    label: "Site Settings"
+    format: "json"
+    file: "content/site.json"
+    fields:
+      - {label: Brand, name: brand, widget: string}
+      - {label: Contract, name: contract, widget: string}
+      - {label: Supply, name: supply, widget: number}
+      - {label: Decimals, name: decimals, widget: number}
+      - {label: Hero Image, name: hero_image, widget: image, allow_multiple: false}
+      - label: Slogans IT
+        name: slogans_it
+        widget: list
+        field: {label: Slogan, name: slogan, widget: string}
+      - label: Slogans EN
+        name: slogans_en
+        widget: list
+        field: {label: Slogan, name: slogan, widget: string}
+      - label: Social
+        name: social
+        widget: object
+        fields:
+          - {label: Twitter, name: twitter, widget: string, required: false}
+          - {label: Telegram, name: telegram, widget: string, required: false}
+          - {label: Discord, name: discord, widget: string, required: false}
+          - {label: Website, name: website, widget: string, required: false}
+
+  - name: "i18n_it"
+    label: "Testi – Italiano"
+    format: "json"
+    file: "content/i18n-it.json"
+    fields:
+      - {label: Nav Home, name: nav_home, widget: string}
+      - {label: Nav Tokenomics, name: nav_tok, widget: string}
+      - {label: Nav How, name: nav_how, widget: string}
+      - {label: Nav Charity, name: nav_charity, widget: string}
+      - {label: Hero Titolo A, name: hero_title_a, widget: string}
+      - {label: Hero Titolo B, name: hero_title_b, widget: string}
+      - {label: Hero Tagline, name: hero_tag, widget: text}
+      - {label: Label Contratto, name: contract, widget: string}
+      - {label: Bottone BaseScan, name: view_basescan, widget: string}
+      - {label: CTA Buy, name: cta_buy, widget: string}
+      - {label: CTA Add, name: cta_add, widget: string}
+      - {label: Label Supply, name: supply, widget: string}
+      - {label: Label Decimali, name: decimals, widget: string}
+      - {label: Label Tasse, name: tax, widget: string}
+      - {label: Zero, name: zero, widget: string}
+      - {label: Sezione Mascotte, name: mascots, widget: string}
+      - {label: Mascotte Blurb, name: mascots_blurb, widget: text}
+      - {label: Titolo Tokenomics, name: tok_title, widget: string}
+      - {label: Blurb Tokenomics, name: tok_blurb, widget: text}
+      - {label: Nota Tokenomics, name: tok_note, widget: text}
+      - {label: Titolo How, name: how_title, widget: string}
+      - {label: Step 1, name: how_1, widget: text}
+      - {label: Step 2, name: how_2, widget: text}
+      - {label: Step 3, name: how_3, widget: text}
+      - {label: Buy Notes, name: buy_notes, widget: text}
+      - {label: Titolo Charity, name: charity_title, widget: string}
+      - {label: Testo Charity, name: charity_text, widget: text}
+
+  - name: "i18n_en"
+    label: "Texts – English"
+    format: "json"
+    file: "content/i18n-en.json"
+    fields:
+      - {label: Nav Home, name: nav_home, widget: string}
+      - {label: Nav Tokenomics, name: nav_tok, widget: string}
+      - {label: Nav How, name: nav_how, widget: string}
+      - {label: Nav Charity, name: nav_charity, widget: string}
+      - {label: Hero Title A, name: hero_title_a, widget: string}
+      - {label: Hero Title B, name: hero_title_b, widget: string}
+      - {label: Hero Tagline, name: hero_tag, widget: text}
+      - {label: Label Contract, name: contract, widget: string}
+      - {label: Button BaseScan, name: view_basescan, widget: string}
+      - {label: CTA Buy, name: cta_buy, widget: string}
+      - {label: CTA Add, name: cta_add, widget: string}
+      - {label: Label Supply, name: supply, widget: string}
+      - {label: Label Decimals, name: decimals, widget: string}
+      - {label: Label Tax, name: tax, widget: string}
+      - {label: Zero, name: zero, widget: string}
+      - {label: Section Mascots, name: mascots, widget: string}
+      - {label: Mascots Blurb, name: mascots_blurb, widget: text}
+      - {label: Tokenomics Title, name: tok_title, widget: string}
+      - {label: Tokenomics Blurb, name: tok_blurb, widget: text}
+      - {label: Tokenomics Note, name: tok_note, widget: text}
+      - {label: How Title, name: how_title, widget: string}
+      - {label: Step 1, name: how_1, widget: text}
+      - {label: Step 2, name: how_2, widget: text}
+      - {label: Step 3, name: how_3, widget: text}
+      - {label: Buy Notes, name: buy_notes, widget: text}
+      - {label: Charity Title, name: charity_title, widget: string}
+      - {label: Charity Text, name: charity_text, widget: text}
+
+  - name: "tokenomics"
+    label: "Tokenomics"
+    format: "json"
+    file: "content/tokenomics.json"
+    fields:
+      - label: Items
+        name: items
+        widget: list
+        fields:
+          - {label: Label IT, name: label_it, widget: string}
+          - {label: Label EN, name: label_en, widget: string}
+          - {label: Percent, name: pct, widget: number, min: 0, max: 100, step: 1}
+
+  - name: "charity"
+    label: "Charity"
+    format: "json"
+    file: "content/charity.json"
+    fields:
+      - {label: Testo IT, name: text_it, widget: text}
+      - {label: Text EN, name: text_en, widget: text}
+      - {label: Frequency, name: frequency, widget: select, options: ["weekly","bi-weekly","monthly"]}

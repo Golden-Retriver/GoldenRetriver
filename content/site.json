@@ -1,0 +1,27 @@
+{
+  "brand": "GOLDEN",
+  "contract": "0xCD0C8c94c4652f0FE969630A1C952b733C0Ad867",
+  "supply": 7000000000,
+  "decimals": 18,
+  "hero_image": "golden-hero.jpg",
+  "slogans_it": [
+    "Who\u2019s a good coin?",
+    "Fetch your bag.",
+    "Sit. Stay. Stake.",
+    "In dogs we trust.",
+    "No tricks. Just treats."
+  ],
+  "slogans_en": [
+    "Who\u2019s a good coin?",
+    "Fetch your bag.",
+    "Sit. Stay. Stake.",
+    "In dogs we trust.",
+    "No tricks. Just treats."
+  ],
+  "social": {
+    "twitter": "",
+    "telegram": "",
+    "discord": "",
+    "website": ""
+  }
+}

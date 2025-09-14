@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GOLDEN – golden retriever memecoin on Base</title>
+  <meta name="description" content="GOLDEN: golden retriever memecoin on Base. 0% tax, fixed supply, real charity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root { --cream:#FFF7E5; --amber1:#FAD99F; --amber2:#F5C46B; --amber3:#EFB43A; --brown:#8A5A0A; }
+    body { font-family: 'Outfit', system-ui, -apple-system, sans-serif; background: var(--cream); color: #1f2937; }
+    .pill { border: 1px solid rgba(0,0,0,.08); box-shadow: 0 8px 30px rgba(0,0,0,.07); }
+    .marquee { display:flex; gap: 2rem; white-space: nowrap; overflow:hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .marquee-track { display:flex; gap: 2rem; animation: scroll 18s linear infinite; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .section { scroll-margin-top: 80px; }
+    .admin-badge { position:fixed; bottom:16px; right:16px; background:#000; color:#fff; padding:8px 12px; border-radius:999px; opacity:.7; }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 backdrop-blur bg-[color:rgba(255,247,229,.7)] border-b border-amber-200/60">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="location.hash='#home'">
+        <div class="w-9 h-9 rounded-2xl bg-amber-300/80 grid place-items-center text-2xl">🐕</div>
+        <span class="font-extrabold tracking-tight text-xl" id="brand">GOLDEN</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#home" class="hover:opacity-80" data-i18n="nav_home">Home</a>
+        <a href="#tokenomics" class="hover:opacity-80" data-i18n="nav_tok">Tokenomics</a>
+        <a href="#how" class="hover:opacity-80" data-i18n="nav_how">Come comprare</a>
+        <a href="#charity" class="hover:opacity-80" data-i18n="nav_charity">Charity</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="langBtn" class="px-3 py-1 rounded-xl border border-amber-200 hover:bg-amber-100 text-sm">EN</button>
+        <a href="/admin/" class="text-sm underline">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="section max-w-6xl mx-auto px-4 pt-12 md:pt-20">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+          <span data-i18n="hero_title_a">Chi è un</span> <span class="text-[var(--brown)]" data-i18n="hero_title_b">bravo coin</span>? 🐾
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-stone-700/90" data-i18n="hero_tag">
+          La memecoin del golden retriever su Base: supply fissa, 0% tax, solo good vibes.
+        </p>
+
+        <div class="mt-6 p-4 rounded-2xl bg-white/80 pill">
+          <div class="text-xs uppercase tracking-wider text-stone-500" data-i18n="contract">Contratto</div>
+          <div class="mt-1 flex items-center gap-2 break-all font-mono text-sm">
+            <span id="contractTxt">0x...</span>
+            <button class="px-2 py-1 rounded-lg border border-stone-300 hover:bg-amber-100" onclick="copyContract()">Copy</button>
+            <a class="px-2 py-1 rounded-lg border border-stone-300 hover:bg-amber-100" target="_blank" id="basescan" data-i18n="view_basescan">Vedi su BaseScan</a>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a id="aero" target="_blank" class="px-5 py-3 rounded-2xl bg-[var(--amber3)] hover:bg-[var(--amber2)] text-stone-950 font-semibold shadow" data-i18n="cta_buy">Compra su DEX</a>
+          <button onclick="addToMetaMask()" class="px-5 py-3 rounded-2xl border border-stone-300 hover:bg-amber-100" data-i18n="cta_add">Aggiungi a MetaMask</button>
+        </div>
+
+        <div class="mt-4 text-sm text-stone-600">
+          <span data-i18n="supply">Supply</span>: <span class="font-semibold" id="supply">7,000,000,000</span> ·
+          <span data-i18n="decimals">Decimali</span>: <span class="font-semibold" id="decimals">18</span> ·
+          <span data-i18n="tax">Tasse</span>: <span class="font-semibold"><span data-i18n="zero">0%</span></span>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-3xl bg-stone-800 flex items-center justify-center shadow-xl overflow-hidden">
+          <img id="heroImg" src="golden-hero.jpg" alt="Golden retriever hero" class="w-full h-full object-cover" />
+          <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow px-4 py-2 text-sm border border-amber-200">0% tax • Fixed supply • Base (8453)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 marquee">
+      <div id="marquee" class="marquee-track text-stone-700/80 font-semibold"></div>
+    </div>
+  </main>
+
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="mascots">Caricature</h2>
+    <p class="text-stone-700/90 mb-6" data-i18n="mascots_blurb">Golden cuccioli: felici, strizzati d'occhio, giocosi.</p>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-2xl bg-white/80 pill"><img src="puppy-1.png" class="w-full h-auto" alt="Pup 1" /></div>
+      <div class="p-5 rounded-2xl bg-white/80 pill"><img src="puppy-2.png" class="w-full h-auto" alt="Pup 2" /></div>
+      <div class="p-5 rounded-2xl bg-white/80 pill"><img src="puppy-3.png" class="w-full h-auto" alt="Pup 3" /></div>
+    </div>
+  </section>
+
+  <section id="tokenomics" class="section max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4" data-i18n="tok_title">Tokenomics</h2>
+    <p class="text-stone-700/90 mb-6" data-i18n="tok_blurb">Distribuzione chiara e trasparente: LP lock, POL per sostenibilità, charity reale.</p>
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div class="bg-white/80 rounded-2xl p-5 pill">
+        <canvas id="pie"></canvas>
+      </div>
+      <div id="tokList" class="space-y-2"></div>
+    </div>
+    <p class="mt-4 text-sm text-stone-600" data-i18n="tok_note">Nota: deposito in pool 80% (5,6B)...</p>
+  </section>
+
+  <section id="how" class="section max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-2" data-i18n="how_title">Come comprare (Base + MetaMask)</h2>
+    <ol class="list-decimal pl-5 space-y-3 text-lg text-stone-800">
+      <li data-i18n="how_1">Collega MetaMask alla rete Base (chain id 8453)</li>
+      <li data-i18n="how_2">Apri il DEX e seleziona la coppia GOLDEN/USDC</li>
+      <li data-i18n="how_3">Fai lo swap e aggiungi GOLDEN a MetaMask</li>
+    </ol>
+    <div class="mt-8 text-sm text-stone-600"><span data-i18n="buy_notes">Tip: Aerodrome/Uniswap aprono già GOLDEN. Verifica sempre l'indirizzo.</span> <span id="contractInline"></span></div>
+  </section>
+
+  <section id="charity" class="section max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4" data-i18n="charity_title">Charity & programmi (5% supply)</h2>
+    <div class="rounded-2xl p-5 bg-white/80 pill">
+      <p id="charityTxt" class="text-stone-800 leading-relaxed">
+      </p>
+    </div>
+  </section>
+
+  <footer class="border-t border-amber-200/60 py-10 mt-2">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-stone-600" id="disclaimer"></div>
+      <div class="flex items-center gap-4 text-sm">
+        <a id="basescan2" class="underline" target="_blank">BaseScan</a>
+        <a id="aero2" class="underline" target="_blank">Aerodrome</a>
+        <a id="uni2" class="underline" target="_blank">Uniswap</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="admin-badge" href="/admin/">✏️ Edit</a>
+
+<script>
+let SITE, I18N = {}, TOK = {}, CHR = {};
+let lang = 'it';
+
+async function loadJSON(path){ const r = await fetch(path); return r.json(); }
+
+async function init(){
+  SITE = await loadJSON('/content/site.json');
+  I18N.it = await loadJSON('/content/i18n-it.json');
+  I18N.en = await loadJSON('/content/i18n-en.json');
+  TOK  = await loadJSON('/content/tokenomics.json');
+  CHR  = await loadJSON('/content/charity.json');
+
+  // Brand + basics
+  document.getElementById('brand').textContent = SITE.brand || 'GOLDEN';
+  document.getElementById('contractTxt').textContent = SITE.contract;
+  document.getElementById('contractInline').textContent = SITE.contract;
+  document.getElementById('supply').textContent = (SITE.supply || 0).toLocaleString('en-US');
+  document.getElementById('decimals').textContent = SITE.decimals || 18;
+  document.getElementById('heroImg').src = SITE.hero_image || 'golden-hero.jpg';
+
+  const AERO = 'https://aerodrome.finance/swap?outputCurrency=' + SITE.contract;
+  const UNI  = 'https://app.uniswap.org/swap?outputCurrency=' + SITE.contract + '&chain=base';
+  const BSC  = 'https://basescan.org/token/' + SITE.contract;
+  document.getElementById('aero').href = AERO;
+  document.getElementById('aero2').href = AERO;
+  document.getElementById('uni2').href = UNI;
+  document.getElementById('basescan').href = BSC;
+  document.getElementById('basescan2').href = BSC;
+
+  // Slogans marquee
+  const mq = document.getElementById('marquee');
+  const arr = (lang==='it' ? SITE.slogans_it : SITE.slogans_en) || [];
+  mq.innerHTML = arr.concat(arr).map(s => `<span>${s}</span><span>•</span>`).join('');
+
+  // Tokenomics
+  const ctx = document.getElementById('pie');
+  const labels = TOK.items.map(it => (lang==='it' ? it.label_it : it.label_en));
+  const data = TOK.items.map(it => it.pct);
+  new Chart(ctx, {
+    type:'pie',
+    data: { labels, datasets: [{ data, backgroundColor:['#EFB43A','#F5C46B','#FAD99F','#FEEBCB','#FFE8B3','#F7F4EA','#EFDCA9'], borderWidth:0 }] },
+    options: { plugins: { legend: { position:'bottom' } } }
+  });
+  const list = document.getElementById('tokList');
+  list.innerHTML = TOK.items.map(it => {
+    const lbl = (lang==='it' ? it.label_it : it.label_en);
+    const amt = Math.round((SITE.supply||0) * (it.pct/100)).toLocaleString('en-US');
+    return `<div class="flex items-center justify-between text-sm bg-white/60 border border-amber-100 rounded-xl px-3 py-2"><span>${lbl}</span><span>${it.pct}% · ${amt}</span></div>`;
+  }).join('');
+
+  // Charity text
+  document.getElementById('charityTxt').textContent = (lang==='it' ? CHR.text_it : CHR.text_en);
+
+  // i18n initial apply
+  applyLang();
+
+  // Year / footer
+  document.getElementById('disclaimer').textContent = (lang==='it'
+    ? `© ${new Date().getFullYear()} ${SITE.brand}. Memecoin community su Base. Non è un consiglio finanziario.`
+    : `© ${new Date().getFullYear()} ${SITE.brand}. Community memecoin on Base. Not financial advice.`);
+}
+
+function applyLang(){
+  const d = I18N[lang] || {};
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (d[key]) el.textContent = d[key];
+  });
+}
+document.getElementById('langBtn').addEventListener('click', ()=>{
+  lang = (lang==='it'?'en':'it');
+  document.getElementById('langBtn').textContent = (lang==='it'?'EN':'IT');
+  init();
+});
+
+function copyContract(){
+  navigator.clipboard.writeText(SITE.contract || '').then(()=>toast('Copied ✨'));
+}
+function toast(msg){
+  const el=document.createElement('div');
+  el.className='fixed top-4 right-4 z-50 rounded-xl px-4 py-2 shadow-lg bg-black/80 text-white text-sm';
+  el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(),1500);
+}
+function addToMetaMask(){
+  if(!window.ethereum){ alert('MetaMask not found'); return; }
+  window.ethereum.request({
+    method:'wallet_watchAsset',
+    params:{ type:'ERC20', options:{ address:SITE.contract, symbol:'GOLDEN', decimals: SITE.decimals || 18 } }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', init);
+// Auto-open Identity widget if hash is /admin and not logged in
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => { if (!user) { /* nothing */ } });
+}
+</script>
+</body>
+</html>

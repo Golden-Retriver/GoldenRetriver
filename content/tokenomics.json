@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "label_it": "LP Lock (75%)",
+      "label_en": "LP Lock (75%)",
+      "pct": 75
+    },
+    {
+      "label_it": "LP POL \u2013 Tesoreria (5%)",
+      "label_en": "LP POL \u2013 Treasury (5%)",
+      "pct": 5
+    },
+    {
+      "label_it": "Marketing (5%)",
+      "label_en": "Marketing (5%)",
+      "pct": 5
+    },
+    {
+      "label_it": "Charity (5%)",
+      "label_en": "Charity (5%)",
+      "pct": 5
+    },
+    {
+      "label_it": "OTC Investors (5%)",
+      "label_en": "OTC Investors (5%)",
+      "pct": 5
+    },
+    {
+      "label_it": "Community (2%)",
+      "label_en": "Community (2%)",
+      "pct": 2
+    },
+    {
+      "label_it": "Team (3%)",
+      "label_en": "Team (3%)",
+      "pct": 3
+    }
+  ]
+}
